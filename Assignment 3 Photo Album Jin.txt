@@ -1,0 +1,7 @@
+Jinyong Jeong 811144424
+
+Finished Project (kinda)
+Can find on vm in folder Assn3
+http://172.17.149.161:8080/Assn3/Albums.jsp
+
+complete with Add new photo button

@@ -1,0 +1,116 @@
+<!DOCTYPE html> 
+<html>
+<style>
+
+.genre li{
+	display:block;
+	list-style-type: none;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-bottom: 1em;
+	padding-top: 1rem;
+	border-bottom:3px solid rgba(0,0,0,.2); 
+	border-collapse: separate;
+}
+
+#rockArtist li{
+	/*#for id css - overwrite class with id*/
+	border-bottom: 3px solid rgba(204, 102, 255,.5);
+}
+
+li:hover{
+	background-color: #ddd; /*(221,221,221)*/
+}
+
+.hide li{
+	display:none !important;
+}
+
+#newRockArtist{
+	color: #b0b0b0;
+	border-bottom: 3px solid rgb(221,221,221) !important;
+}
+
+.hideArea{
+	display:none !important;
+}
+
+</style>
+<!-- rgba can give opacity-->
+
+<!-- may have to split hide and show in specific category during album and song-->
+<meta charset = "UTF-8">
+
+<head>
+<title> Genre Voting </title>
+
+</head>
+
+
+
+<body> <!-- Body should contain clickable genre names, format in blocks that are clickable (no buttons)-->
+	<!-- href to the tomcat server? -->
+	<h1> Music Dictionary</h1><br>
+	<h2> Genre - Add artists!</h2><br><br>
+	<ul class = "genre" id ="genre">
+		<li id = "rock" onclick="dropDownRock()"> Rock </li>
+			<ul id ="rockArtist" class ="hide">
+				<li id ="newRockArtist" class = "new" onclick="rockArtistPrompt()"> Add New </li>
+					<!-- <textarea width:100% id ="artistBox" class="hideArea" placeholder="rock"></textarea> try .prompt instead of text area? -->
+					<!-- <button type= "submit" id = "artistButton" onclick="addArtist()" class ="hideArea"> add </button>  -->
+					<!--artistbox-->
+				<li id= "oasis"> oasis </li>
+			</ul><!--rockArtist-->
+		<li id = "jazz"> Jazz </li>
+		<li id = "hiphop"> Hiphop </li>
+		<li id = "pop"> Pop </li>
+	</ul>
+
+	<script>
+		function rockArtistPrompt(){
+			var rockList =document.getElementById("rockArtist").getElementsByTagName("li");
+			console.log("you wanted to add a new rock artist");
+			var artist = prompt("Please enter the new rock artist!");
+			if(artist ==null ||artist ==""){
+				console.log("you changed your mind");
+			}
+			else{
+				for(var i = 0; i< rockList.length; i++){
+					console.log("currently looping through");
+					console.log(rockList[i]);
+				} /*do I need to loop through this part*/
+				console.log("You tried to add the artist: " + artist);
+				if(document.getElementById(artist) == null){
+					console.log("This is indeed a new artist!");
+					var ul = document.getElementById("rockArtist");
+					var newArtist = document.createElement("li");
+					newArtist.appendChild(document.createTextNode(artist));
+					ul.appendChild(newArtist);
+					newArtist.setAttribute("id", artist); /*may want to make this into a separate function - not really bc separate ul for everything*/
+					console.log("it should be added.");
+				}
+				/*how to find id in the string of list? if getElementById returns null ->
+				/*go through loop of id, if artist is same, then don't add, if not, add. innerHTML id = artist*/
+			}
+		}
+		function dropDownRock(){
+			console.log("you clicked on Rock");
+			document.getElementById("rockArtist").classList.remove("hide");
+			//always have "Add new" (clickable, new text box to type in whatever artist you want, new li under genre id, id and content is artist)
+			//is there a case where I would have to retoggle hide?
+		}
+		//need 3 functions to add (addArtist, addAlbum, addSong) - how will I do interface? new window? Change "add new" so it is typeable.
+		function addArtist(){
+			console.log("add artist to the list of artists"); //getElement.value -> document.createElement()
+			//clear textbox, compare value to everything in the list, if not same, add artist.
+			var areaElement = document.getElementById("artistBox").value;
+			//put li into string / array/ whatever.
+			console.log("we must add: " + areaElement);
+		}
+	</script>
+
+</body>
+
+</html>
